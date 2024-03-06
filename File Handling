@@ -1,0 +1,88 @@
+<!-- File handling in Java involves performing operations on files and directories, such as creating, reading, writing, and deleting files. Java provides several classes in the `java.io` package and the `java.nio.file` package to handle file operations. Here is an overview of file handling in Java: -->
+
+1. `java.io` Package (Traditional I/O):
+a. File Class:
+   - The `File` class represents a file or directory path.
+   - Common constructors: 
+     ```java
+     File file = new File("path/to/file.txt");
+     ```
+
+   - Basic operations:
+     ```java
+     file.exists();       // Check if the file exists
+     file.isFile();       // Check if it is a file
+     file.isDirectory();  // Check if it is a directory
+     file.getName();      // Get the file/directory name
+     file.getAbsolutePath(); // Get the absolute path
+     ```
+
+   - File manipulation:
+     ```java
+     file.createNewFile();  // Create a new file
+     file.delete();         // Delete the file
+     ```
+
+b. FileInputStream and FileOutputStream:
+   - `FileInputStream` is used for reading data from a file.
+   - `FileOutputStream` is used for writing data to a file.
+   - Example:
+     ```java
+     FileInputStream fis = new FileInputStream("input.txt");
+     int data;
+     while ((data = fis.read()) != -1) {
+         // Process data
+     }
+     fis.close();
+
+     FileOutputStream fos = new FileOutputStream("output.txt");
+     fos.write("Hello, World!".getBytes());
+     fos.close();
+     ```
+
+c. BufferedReader and BufferedWriter:
+   - `BufferedReader` and `BufferedWriter` provide buffering capabilities for efficient reading and writing.
+   - Example:
+     ```java
+     BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+     String line;
+     while ((line = reader.readLine()) != null) {
+         // Process each line
+     }
+     reader.close();
+
+     BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+     writer.write("Hello, World!");
+     writer.close();
+     ```
+
+2. `java.nio.file` Package (New I/O):
+a. Paths and Files:
+   - `Paths` class is used to obtain a `Path` object, representing the file or directory path.
+   - `Files` class provides static methods for file operations.
+   - Example:
+     ```java
+     Path path = Paths.get("path/to/file.txt");
+     Files.exists(path);      // Check if the file exists
+     Files.isRegularFile(path); // Check if it is a regular file
+     ```
+
+b. Reading and Writing with Files:
+   - `Files.readAllBytes()`, `Files.readAllLines()`, `Files.write()` for reading and writing content.
+   - Example:
+     ```java
+     byte[] fileData = Files.readAllBytes(path);
+     List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+     Files.write(path, "Hello, World!".getBytes());
+     ```
+
+c. Directory Operations:
+   - `Files.createDirectory()`, `Files.createFile()`, `Files.delete()` for creating and deleting directories and files.
+   - Example:
+     ```java
+     Path directoryPath = Paths.get("path/to/directory");
+     Files.createDirectory(directoryPath);
+     Files.createFile(directoryPath.resolve("newFile.txt"));
+     ```
+
+<!-- These are just the basics, and there are more advanced features available in both the traditional I/O (`java.io`) and the new I/O (`java.nio.file`) packages. Choose the appropriate approach based on your requirements and the version of Java you are using. For Java 7 and later, the `java.nio.file` package is recommended for its improved functionality and performance. -->
